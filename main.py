@@ -4,7 +4,7 @@ from pydantic import BaseModel
 import uvicorn  # type: ignore
 app=FastAPI()
 
-class Item(BaseModel):
+class Item(BaseModel):  #pydantic model to validate the data 
     name: str
     no:int
 class Updatestudent(BaseModel):
@@ -29,8 +29,7 @@ async def hello():
 async def hi():
     return "helloworld"
 
-
-#exception here plz check 
+#get
 @app.get("/student/{student_id}")
 def student_info(student_id:int):
     if student_id not in student:
@@ -71,6 +70,8 @@ def delete_record(student_id:int):
         raise HTTPException(status_code=404,detail=f"student {student_id} is not present")
     del student[student_id]
     return {"status":"success"}
+
+
 
 
 @app.get("/book/{no}")
